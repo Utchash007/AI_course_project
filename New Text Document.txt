@@ -1,0 +1,12 @@
+# Calculate IQR for 'Price'
+Q1_price = dataset['Price'].quantile(0.25)
+Q3_price = dataset['Price'].quantile(0.75)
+IQR_price = Q3_price - Q1_price
+
+# Define lower and upper bounds for outliers in 'Price'
+lower_bound_price = Q1_price - 1.5 * IQR_price
+upper_bound_price = Q3_price + 1.5 * IQR_price
+
+# Filter dataset to remove outliers in 'Price'
+filtered_dataset=filtered_dataset[(filtered_dataset['Price'] >= lower_bound_price) & (filtered_dataset['Price'] <= upper_bound_price)]
+filtered_dataset.head()
